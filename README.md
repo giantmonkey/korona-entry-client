@@ -14,8 +14,12 @@ gem push korona-entry-client-1.0.0.gem
 
 # usage in a project
 ```
-config = KoronaEntryClient::Configuration.new {|config| config.host = 'korona3.de'; config.base_path = 'entry_mk/services/v1/rxb/' }
-client  =  KoronaEntryClient::ApiClient.new(config)
+config = KoronaEntryClient::Configuration.new do |config|
+  config.host       = 'korona3.de'
+  config.base_path  = 'entry_mk/services/v1/rxb/'
+end
+
+client  = KoronaEntryClient::ApiClient.new(config)
 api     = KoronaEntryClient::TicketsApi.new(client)
-api.get_tickets('', 0, 1, {locked: true})
+tickets = api.get_tickets('', 0, 1, {locked: true})
 ```
