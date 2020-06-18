@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["OpenAPI-Generator"]
   s.email       = [""]
-  s.homepage    = "https://github.com/giantmonkey/korona-entry-client",
+  s.homepage    = "https://github.com/giantmonkey/korona-entry-client"
   s.summary     = "KORONA.entry API v1 Ruby Gem"
   s.description = "Our api provides access to our entry services"
   s.license     = "Unlicense"
