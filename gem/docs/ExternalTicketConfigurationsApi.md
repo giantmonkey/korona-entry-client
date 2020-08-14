@@ -1,6 +1,6 @@
 # KoronaEntryClient::ExternalTicketConfigurationsApi
 
-All URIs are relative to *https://YourLocalInstance.com/korona.entry_server/services/v1*
+All URIs are relative to *https://YourLocalInstance.com/korona.entry/services/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

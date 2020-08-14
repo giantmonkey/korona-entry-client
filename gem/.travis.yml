@@ -8,4 +8,4 @@ script:
   - bundle install --path vendor/bundle
   - bundle exec rspec
   - gem build korona-entry-client.gemspec
-  - gem install ./korona-entry-client-1.0.0.gem
+  - gem install ./korona-entry-client-1.0.2.gem

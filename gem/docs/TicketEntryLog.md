@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **client** | **String** | Client concerned. | [optional] 
 **number_of_uses** | **Integer** | Number of uses if its an entry action. | [optional] 
 **commit_type** | **String** | Identification of commit type. | [optional] 
-**test_time** | **DateTime** | Time of testing. | [optional] 
 
 ## Code Sample
 
@@ -32,8 +31,7 @@ instance = KoronaEntryClient::TicketEntryLog.new(id: null,
                                  organizational_unit_number: null,
                                  client: null,
                                  number_of_uses: null,
-                                 commit_type: null,
-                                 test_time: null)
+                                 commit_type: null)
 ```
 
 

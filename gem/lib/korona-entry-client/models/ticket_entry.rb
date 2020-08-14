@@ -65,6 +65,9 @@ module KoronaEntryClient
     # Specifies how many seconds the ticket should be locked after a successful entry.
     attr_accessor :re_entry_lock
 
+    # Specifies a time period after which the ticket is locked from the first use. The standard ISO 8601 format is used - PyYmMwWdDThHmMsS. Note that weeks should not be shown if any other field is present and vice versa.
+    attr_accessor :lock_for_period_after_use
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -84,7 +87,8 @@ module KoronaEntryClient
         :'entry_gates' => :'entryGates',
         :'information' => :'information',
         :'locked_to' => :'lockedTo',
-        :'re_entry_lock' => :'reEntryLock'
+        :'re_entry_lock' => :'reEntryLock',
+        :'lock_for_period_after_use' => :'lockForPeriodAfterUse'
       }
     end
 
@@ -107,7 +111,8 @@ module KoronaEntryClient
         :'entry_gates' => :'Array<String>',
         :'information' => :'TicketInformation',
         :'locked_to' => :'DateTime',
-        :'re_entry_lock' => :'Integer'
+        :'re_entry_lock' => :'Integer',
+        :'lock_for_period_after_use' => :'String'
       }
     end
 
@@ -201,6 +206,10 @@ module KoronaEntryClient
       if attributes.key?(:'re_entry_lock')
         self.re_entry_lock = attributes[:'re_entry_lock']
       end
+
+      if attributes.key?(:'lock_for_period_after_use')
+        self.lock_for_period_after_use = attributes[:'lock_for_period_after_use']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -271,7 +280,8 @@ module KoronaEntryClient
           entry_gates == o.entry_gates &&
           information == o.information &&
           locked_to == o.locked_to &&
-          re_entry_lock == o.re_entry_lock
+          re_entry_lock == o.re_entry_lock &&
+          lock_for_period_after_use == o.lock_for_period_after_use
     end
 
     # @see the `==` method
@@ -283,7 +293,7 @@ module KoronaEntryClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, create_date, used_up, first_use, last_use, last_exit, uses, uses_max, valid_from, valid_to, valid_from_time, valid_to_time, lock_after_use, entry_gates, information, locked_to, re_entry_lock].hash
+      [id, create_date, used_up, first_use, last_use, last_exit, uses, uses_max, valid_from, valid_to, valid_from_time, valid_to_time, lock_after_use, entry_gates, information, locked_to, re_entry_lock, lock_for_period_after_use].hash
     end
 
     # Builds the object from hash

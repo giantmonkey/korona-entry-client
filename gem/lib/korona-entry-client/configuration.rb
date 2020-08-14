@@ -128,7 +128,7 @@ module KoronaEntryClient
     def initialize
       @scheme = 'https'
       @host = 'YourLocalInstance.com'
-      @base_path = '/korona.entry_server/services/v1'
+      @base_path = '/korona.entry/services/v1'
       @api_key = {}
       @api_key_prefix = {}
       @timeout = 0
@@ -207,7 +207,7 @@ module KoronaEntryClient
     def server_settings
       [
         {
-          url: "https://YourLocalInstance.com/korona.entry_server/services/v1",
+          url: "https://YourLocalInstance.com/korona.entry/services/v1",
           description: "No description provided",
         }
       ]

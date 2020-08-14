@@ -13,38 +13,26 @@ OpenAPI Generator version: 4.3.0
 require 'date'
 
 module KoronaEntryClient
-  # Represents a tickte log entry, f.e. created by update, check or access.
-  class TicketEntryLog
-    # Objects ID.
-    attr_accessor :id
+  class StatisticGroupedEntry
+    attr_accessor :article_number
 
-    # Short comment for this action.
-    attr_accessor :comment
+    attr_accessor :year
 
-    attr_accessor :ticket
+    attr_accessor :month
 
-    attr_accessor :ticket_entry
+    attr_accessor :day
 
-    # Identification of action type.
-    attr_accessor :log_type
+    attr_accessor :hour
 
-    # Identification of response type.
-    attr_accessor :response
+    attr_accessor :commit_type
 
-    # Time of action.
-    attr_accessor :time
+    attr_accessor :entries
 
-    # Number of the organizational unit concerned.
+    attr_accessor :tickets
+
     attr_accessor :organizational_unit_number
 
-    # Client concerned.
-    attr_accessor :client
-
-    # Number of uses if its an entry action.
-    attr_accessor :number_of_uses
-
-    # Identification of commit type.
-    attr_accessor :commit_type
+    attr_accessor :tag
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -71,34 +59,32 @@ module KoronaEntryClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'comment' => :'comment',
-        :'ticket' => :'ticket',
-        :'ticket_entry' => :'ticketEntry',
-        :'log_type' => :'logType',
-        :'response' => :'response',
-        :'time' => :'time',
+        :'article_number' => :'articleNumber',
+        :'year' => :'year',
+        :'month' => :'month',
+        :'day' => :'day',
+        :'hour' => :'hour',
+        :'commit_type' => :'commitType',
+        :'entries' => :'entries',
+        :'tickets' => :'tickets',
         :'organizational_unit_number' => :'organizationalUnitNumber',
-        :'client' => :'client',
-        :'number_of_uses' => :'numberOfUses',
-        :'commit_type' => :'commitType'
+        :'tag' => :'tag'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'Integer',
-        :'comment' => :'String',
-        :'ticket' => :'ModelReference',
-        :'ticket_entry' => :'ModelReference',
-        :'log_type' => :'String',
-        :'response' => :'String',
-        :'time' => :'DateTime',
+        :'article_number' => :'String',
+        :'year' => :'Integer',
+        :'month' => :'Integer',
+        :'day' => :'Integer',
+        :'hour' => :'Integer',
+        :'commit_type' => :'String',
+        :'entries' => :'Integer',
+        :'tickets' => :'Integer',
         :'organizational_unit_number' => :'String',
-        :'client' => :'String',
-        :'number_of_uses' => :'Integer',
-        :'commit_type' => :'String'
+        :'tag' => :'String'
       }
     end
 
@@ -112,59 +98,55 @@ module KoronaEntryClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `KoronaEntryClient::TicketEntryLog` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `KoronaEntryClient::StatisticGroupedEntry` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `KoronaEntryClient::TicketEntryLog`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `KoronaEntryClient::StatisticGroupedEntry`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'article_number')
+        self.article_number = attributes[:'article_number']
       end
 
-      if attributes.key?(:'comment')
-        self.comment = attributes[:'comment']
+      if attributes.key?(:'year')
+        self.year = attributes[:'year']
       end
 
-      if attributes.key?(:'ticket')
-        self.ticket = attributes[:'ticket']
+      if attributes.key?(:'month')
+        self.month = attributes[:'month']
       end
 
-      if attributes.key?(:'ticket_entry')
-        self.ticket_entry = attributes[:'ticket_entry']
+      if attributes.key?(:'day')
+        self.day = attributes[:'day']
       end
 
-      if attributes.key?(:'log_type')
-        self.log_type = attributes[:'log_type']
+      if attributes.key?(:'hour')
+        self.hour = attributes[:'hour']
       end
 
-      if attributes.key?(:'response')
-        self.response = attributes[:'response']
+      if attributes.key?(:'commit_type')
+        self.commit_type = attributes[:'commit_type']
       end
 
-      if attributes.key?(:'time')
-        self.time = attributes[:'time']
+      if attributes.key?(:'entries')
+        self.entries = attributes[:'entries']
+      end
+
+      if attributes.key?(:'tickets')
+        self.tickets = attributes[:'tickets']
       end
 
       if attributes.key?(:'organizational_unit_number')
         self.organizational_unit_number = attributes[:'organizational_unit_number']
       end
 
-      if attributes.key?(:'client')
-        self.client = attributes[:'client']
-      end
-
-      if attributes.key?(:'number_of_uses')
-        self.number_of_uses = attributes[:'number_of_uses']
-      end
-
-      if attributes.key?(:'commit_type')
-        self.commit_type = attributes[:'commit_type']
+      if attributes.key?(:'tag')
+        self.tag = attributes[:'tag']
       end
     end
 
@@ -178,33 +160,9 @@ module KoronaEntryClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      log_type_validator = EnumAttributeValidator.new('String', ["CREATE", "UPDATE", "EXTEND", "VALIDATE", "PREPARE_ENTRY", "COMMIT_ENTRY"])
-      return false unless log_type_validator.valid?(@log_type)
-      response_validator = EnumAttributeValidator.new('String', ["BEFORETIME", "DENIED", "DOESNTEXIST", "EXHAUSTED", "INVALID", "LOCKED", "SUSPENDED", "TIMEUP", "TIME_QUOTA_OVERDRAWN", "SUCCESS"])
-      return false unless response_validator.valid?(@response)
       commit_type_validator = EnumAttributeValidator.new('String', ["ACCESS", "EXIT"])
       return false unless commit_type_validator.valid?(@commit_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] log_type Object to be assigned
-    def log_type=(log_type)
-      validator = EnumAttributeValidator.new('String', ["CREATE", "UPDATE", "EXTEND", "VALIDATE", "PREPARE_ENTRY", "COMMIT_ENTRY"])
-      unless validator.valid?(log_type)
-        fail ArgumentError, "invalid value for \"log_type\", must be one of #{validator.allowable_values}."
-      end
-      @log_type = log_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] response Object to be assigned
-    def response=(response)
-      validator = EnumAttributeValidator.new('String', ["BEFORETIME", "DENIED", "DOESNTEXIST", "EXHAUSTED", "INVALID", "LOCKED", "SUSPENDED", "TIMEUP", "TIME_QUOTA_OVERDRAWN", "SUCCESS"])
-      unless validator.valid?(response)
-        fail ArgumentError, "invalid value for \"response\", must be one of #{validator.allowable_values}."
-      end
-      @response = response
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -222,17 +180,16 @@ module KoronaEntryClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          comment == o.comment &&
-          ticket == o.ticket &&
-          ticket_entry == o.ticket_entry &&
-          log_type == o.log_type &&
-          response == o.response &&
-          time == o.time &&
+          article_number == o.article_number &&
+          year == o.year &&
+          month == o.month &&
+          day == o.day &&
+          hour == o.hour &&
+          commit_type == o.commit_type &&
+          entries == o.entries &&
+          tickets == o.tickets &&
           organizational_unit_number == o.organizational_unit_number &&
-          client == o.client &&
-          number_of_uses == o.number_of_uses &&
-          commit_type == o.commit_type
+          tag == o.tag
     end
 
     # @see the `==` method
@@ -244,7 +201,7 @@ module KoronaEntryClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, comment, ticket, ticket_entry, log_type, response, time, organizational_unit_number, client, number_of_uses, commit_type].hash
+      [article_number, year, month, day, hour, commit_type, entries, tickets, organizational_unit_number, tag].hash
     end
 
     # Builds the object from hash

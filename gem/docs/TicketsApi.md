@@ -1,13 +1,15 @@
 # KoronaEntryClient::TicketsApi
 
-All URIs are relative to *https://YourLocalInstance.com/korona.entry_server/services/v1*
+All URIs are relative to *https://YourLocalInstance.com/korona.entry/services/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**check_ticket**](TicketsApi.md#check_ticket) | **GET** /{client}/checkTicket | Checks a ticket. The entry can optionally also be committed.
 [**create_ticket**](TicketsApi.md#create_ticket) | **POST** /{client}/tickets | Creates a new ticket.
+[**create_ticket_entry**](TicketsApi.md#create_ticket_entry) | **POST** /{client}/tickets/{ticketId}/ticketEntries | Creates a new ticket entry for a specific ticket.
 [**delete_image**](TicketsApi.md#delete_image) | **DELETE** /{client}/tickets/{ticketId}/image | Deletes the owners image of the ticket.
 [**delete_ticket**](TicketsApi.md#delete_ticket) | **DELETE** /{client}/tickets/{ticketId} | Deletes the single ticket.
+[**delete_ticket_entry**](TicketsApi.md#delete_ticket_entry) | **DELETE** /{client}/tickets/{ticketId}/ticketEntries/{ticketEntryId} | Deletes the single ticket entry (marks it as used up).
 [**get_image**](TicketsApi.md#get_image) | **GET** /{client}/tickets/{ticketId}/image | Returns the owners image of the ticket
 [**get_logs**](TicketsApi.md#get_logs) | **GET** /{client}/ticketEntryLogs | Returns the log for a optional single ticket and/or organizational unit
 [**get_ticket**](TicketsApi.md#get_ticket) | **GET** /{client}/tickets/{ticketId} | Returns the single ticket.
@@ -15,6 +17,7 @@ Method | HTTP request | Description
 [**get_tickets**](TicketsApi.md#get_tickets) | **GET** /{client}/tickets | Lists all tickets.
 [**update_image**](TicketsApi.md#update_image) | **POST** /{client}/tickets/{ticketId}/image | Updates the owners image of the ticket
 [**update_ticket**](TicketsApi.md#update_ticket) | **PATCH** /{client}/tickets/{ticketId} | Updates the single ticket.
+[**update_ticket_entry**](TicketsApi.md#update_ticket_entry) | **PATCH** /{client}/tickets/{ticketId}/ticketEntries/{ticketEntryId} | Updates the single ticket entry.
 
 
 
@@ -29,12 +32,6 @@ Checks a ticket. The entry can optionally also be committed.
 ```ruby
 # load the gem
 require 'korona-entry-client'
-# setup authorization
-KoronaEntryClient.configure do |config|
-  # Configure HTTP basic authorization: basicAuth
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
 
 api_instance = KoronaEntryClient::TicketsApi.new
 client = 'client_example' # String | Identification of executing client.
@@ -75,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -94,12 +91,6 @@ Creates a new ticket.
 ```ruby
 # load the gem
 require 'korona-entry-client'
-# setup authorization
-KoronaEntryClient.configure do |config|
-  # Configure HTTP basic authorization: basicAuth
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
 
 api_instance = KoronaEntryClient::TicketsApi.new
 client = 'client_example' # String | Identification of executing client.
@@ -128,7 +119,56 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_ticket_entry
+
+> ModelReference create_ticket_entry(client, ticket_id, body)
+
+Creates a new ticket entry for a specific ticket.
+
+### Example
+
+```ruby
+# load the gem
+require 'korona-entry-client'
+
+api_instance = KoronaEntryClient::TicketsApi.new
+client = 'client_example' # String | Identification of executing client.
+ticket_id = 56 # Integer | ID to identify the ticket.
+body = KoronaEntryClient::TicketEntry.new # TicketEntry | Properties to update of the ticket entry.
+
+begin
+  #Creates a new ticket entry for a specific ticket.
+  result = api_instance.create_ticket_entry(client, ticket_id, body)
+  p result
+rescue KoronaEntryClient::ApiError => e
+  puts "Exception when calling TicketsApi->create_ticket_entry: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **client** | **String**| Identification of executing client. | 
+ **ticket_id** | **Integer**| ID to identify the ticket. | 
+ **body** | [**TicketEntry**](TicketEntry.md)| Properties to update of the ticket entry. | 
+
+### Return type
+
+[**ModelReference**](ModelReference.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
@@ -147,12 +187,6 @@ Deletes the owners image of the ticket.
 ```ruby
 # load the gem
 require 'korona-entry-client'
-# setup authorization
-KoronaEntryClient.configure do |config|
-  # Configure HTTP basic authorization: basicAuth
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
 
 api_instance = KoronaEntryClient::TicketsApi.new
 client = 'client_example' # String | Identification of executing client.
@@ -180,7 +214,7 @@ nil (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -199,12 +233,6 @@ Deletes the single ticket.
 ```ruby
 # load the gem
 require 'korona-entry-client'
-# setup authorization
-KoronaEntryClient.configure do |config|
-  # Configure HTTP basic authorization: basicAuth
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
 
 api_instance = KoronaEntryClient::TicketsApi.new
 client = 'client_example' # String | Identification of executing client.
@@ -232,7 +260,55 @@ nil (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## delete_ticket_entry
+
+> delete_ticket_entry(client, ticket_id, ticket_entry_id)
+
+Deletes the single ticket entry (marks it as used up).
+
+### Example
+
+```ruby
+# load the gem
+require 'korona-entry-client'
+
+api_instance = KoronaEntryClient::TicketsApi.new
+client = 'client_example' # String | Identification of executing client.
+ticket_id = 56 # Integer | ID to identify the ticket.
+ticket_entry_id = 56 # Integer | ID to identify the ticket entry of the ticket.
+
+begin
+  #Deletes the single ticket entry (marks it as used up).
+  api_instance.delete_ticket_entry(client, ticket_id, ticket_entry_id)
+rescue KoronaEntryClient::ApiError => e
+  puts "Exception when calling TicketsApi->delete_ticket_entry: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **client** | **String**| Identification of executing client. | 
+ **ticket_id** | **Integer**| ID to identify the ticket. | 
+ **ticket_entry_id** | **Integer**| ID to identify the ticket entry of the ticket. | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
@@ -251,12 +327,6 @@ Returns the owners image of the ticket
 ```ruby
 # load the gem
 require 'korona-entry-client'
-# setup authorization
-KoronaEntryClient.configure do |config|
-  # Configure HTTP basic authorization: basicAuth
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
 
 api_instance = KoronaEntryClient::TicketsApi.new
 client = 'client_example' # String | Identification of executing client.
@@ -285,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -304,12 +374,6 @@ Returns the log for a optional single ticket and/or organizational unit
 ```ruby
 # load the gem
 require 'korona-entry-client'
-# setup authorization
-KoronaEntryClient.configure do |config|
-  # Configure HTTP basic authorization: basicAuth
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
 
 api_instance = KoronaEntryClient::TicketsApi.new
 client = 'client_example' # String | Identification of executing client.
@@ -348,7 +412,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -367,12 +431,6 @@ Returns the single ticket.
 ```ruby
 # load the gem
 require 'korona-entry-client'
-# setup authorization
-KoronaEntryClient.configure do |config|
-  # Configure HTTP basic authorization: basicAuth
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
 
 api_instance = KoronaEntryClient::TicketsApi.new
 client = 'client_example' # String | Identification of executing client.
@@ -401,7 +459,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -420,12 +478,6 @@ Returns a single ticket entry.
 ```ruby
 # load the gem
 require 'korona-entry-client'
-# setup authorization
-KoronaEntryClient.configure do |config|
-  # Configure HTTP basic authorization: basicAuth
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
 
 api_instance = KoronaEntryClient::TicketsApi.new
 client = 'client_example' # String | Identification of executing client.
@@ -456,7 +508,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -475,12 +527,6 @@ Lists all tickets.
 ```ruby
 # load the gem
 require 'korona-entry-client'
-# setup authorization
-KoronaEntryClient.configure do |config|
-  # Configure HTTP basic authorization: basicAuth
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
 
 api_instance = KoronaEntryClient::TicketsApi.new
 client = 'client_example' # String | Identification of executing client.
@@ -535,7 +581,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -554,12 +600,6 @@ Updates the owners image of the ticket
 ```ruby
 # load the gem
 require 'korona-entry-client'
-# setup authorization
-KoronaEntryClient.configure do |config|
-  # Configure HTTP basic authorization: basicAuth
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
 
 api_instance = KoronaEntryClient::TicketsApi.new
 client = 'client_example' # String | Identification of executing client.
@@ -590,7 +630,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -609,12 +649,6 @@ Updates the single ticket.
 ```ruby
 # load the gem
 require 'korona-entry-client'
-# setup authorization
-KoronaEntryClient.configure do |config|
-  # Configure HTTP basic authorization: basicAuth
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-end
 
 api_instance = KoronaEntryClient::TicketsApi.new
 client = 'client_example' # String | Identification of executing client.
@@ -645,7 +679,58 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_ticket_entry
+
+> ModelReference update_ticket_entry(client, ticket_id, ticket_entry_id, body)
+
+Updates the single ticket entry.
+
+### Example
+
+```ruby
+# load the gem
+require 'korona-entry-client'
+
+api_instance = KoronaEntryClient::TicketsApi.new
+client = 'client_example' # String | Identification of executing client.
+ticket_id = 56 # Integer | ID to identify the ticket.
+ticket_entry_id = 56 # Integer | ID to identify the ticket entry of the ticket.
+body = KoronaEntryClient::TicketEntry.new # TicketEntry | Properties to update of the ticket entry.
+
+begin
+  #Updates the single ticket entry.
+  result = api_instance.update_ticket_entry(client, ticket_id, ticket_entry_id, body)
+  p result
+rescue KoronaEntryClient::ApiError => e
+  puts "Exception when calling TicketsApi->update_ticket_entry: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **client** | **String**| Identification of executing client. | 
+ **ticket_id** | **Integer**| ID to identify the ticket. | 
+ **ticket_entry_id** | **Integer**| ID to identify the ticket entry of the ticket. | 
+ **body** | [**TicketEntry**](TicketEntry.md)| Properties to update of the ticket entry. | 
+
+### Return type
+
+[**ModelReference**](ModelReference.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 

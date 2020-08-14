@@ -25,6 +25,7 @@ require 'korona-entry-client/models/model_reference'
 require 'korona-entry-client/models/not_acceptable_error'
 require 'korona-entry-client/models/organizational_unit'
 require 'korona-entry-client/models/organizational_unit_list'
+require 'korona-entry-client/models/statistic_grouped_entry'
 require 'korona-entry-client/models/ticket'
 require 'korona-entry-client/models/ticket_entry'
 require 'korona-entry-client/models/ticket_entry_log'
@@ -37,6 +38,7 @@ require 'korona-entry-client/models/ticket_personalization'
 # APIs
 require 'korona-entry-client/api/external_ticket_configurations_api'
 require 'korona-entry-client/api/organizational_units_api'
+require 'korona-entry-client/api/statistics_api'
 require 'korona-entry-client/api/tickets_api'
 
 module KoronaEntryClient

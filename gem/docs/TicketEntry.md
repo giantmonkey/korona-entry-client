@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **information** | [**TicketInformation**](TicketInformation.md) |  | [optional] 
 **locked_to** | **DateTime** | Date until which the ticketEntry is locked. | [optional] 
 **re_entry_lock** | **Integer** | Specifies how many seconds the ticket should be locked after a successful entry. | [optional] 
+**lock_for_period_after_use** | **String** | Specifies a time period after which the ticket is locked from the first use. The standard ISO 8601 format is used - PyYmMwWdDThHmMsS. Note that weeks should not be shown if any other field is present and vice versa. | [optional] 
 
 ## Code Sample
 
@@ -43,7 +44,8 @@ instance = KoronaEntryClient::TicketEntry.new(id: null,
                                  entry_gates: null,
                                  information: null,
                                  locked_to: null,
-                                 re_entry_lock: null)
+                                 re_entry_lock: null,
+                                 lock_for_period_after_use: null)
 ```
 
 
